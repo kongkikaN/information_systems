@@ -25,6 +25,7 @@
   			<?php toggleLogInLogOut(); ?>
 	  	  	
 	    	<li><a href="about.php">About</a></li>
+
 	    	<form method = 'get'>
 		  		<li style="float:right"><input type="submit" value = "search" style = "margin-top : 11px; margin-right:88px;" name="search_bar" placeholder="Information Systems"></li>
 		   		<li style="float:right"><input type="text" style = "margin-top : 11px; margin-right: 5px;" name="search_bar" placeholder="search"></li>
@@ -34,14 +35,30 @@
 </nav>
 <main>
 	<div class = "container">
-	  	<?php if (isset($_GET["search_bar"])&& $_GET['search_bar'] != ''){
+	  	<?php 
+	  	if (isset($_GET["search_bar"])&& $_GET['search_bar'] != ''){
 	  		searchFor($_GET['search_bar']);
 	  	}
 	  	else {
-	  		echoAllArticles();
+	  		
+	  		if (isset($_SESSION["user_id"])){
+  				if (isAdministrator($_SESSION["user_id"])){
+  					echoAllArticles();
+  				}
+  				else {
+  					echoApprovedArticles();
+  				}
+  			}
+  			else {
+  				echoApprovedArticles();
+  			}
 	  	}
 	  	?>
+	  	
+	  	
   	</div>
+
+
 </main>
 <?php 	
 	include 'login_modal.php';
