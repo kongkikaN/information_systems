@@ -3,26 +3,34 @@
 	/*
 		user management
 	 */
-	function registerUser($first_name, $last_name, $email, $password, $category, $academic_degree){
-		$conn = createConnectionToDatabase();
-
-		$query = "INSERT INTO `users` (`inf_user_id`, `inf_first_name`, `inf_last_name`, `inf_email`, `inf_password`) VALUES (NULL, '$first_name', '$last_name', '$email', '$password');";
-		insertDataToDBQuery($conn, $query);
-
-		mysqli_close($conn);
-
-		$conn = createConnectionToDatabase();
-		$query1 = "INSERT INTO `categories` (`inf_user_id`, `inf_category_type`) VALUES (".getUserIdByEmail($email) .", '$category');";
-		insertDataToDBQuery($conn, $query1);
-
-		mysqli_close($conn);
-
-		$conn = createConnectionToDatabase();
-		$query2 = "INSERT INTO `academic_degree` (`inf_user_id`, `inf_academic_degree`) VALUES (".getUserIdByEmail($email) .", '$academic_degree');";
-		insertDataToDBQuery($conn, $query2);
+	function registerUser($first_name, $last_name, $email, $password, $category, $academic_degree, $unipi_id){
 
 
-		echo '<script>alert("You registered your user Successfully to Database");</script>';
+		if ($unipi_id == "123456"){
+			$conn = createConnectionToDatabase();
+
+			$query = "INSERT INTO `users` (`inf_user_id`, `inf_first_name`, `inf_last_name`, `inf_email`, `inf_password`) VALUES (NULL, '$first_name', '$last_name', '$email', '$password');";
+			insertDataToDBQuery($conn, $query);
+
+			mysqli_close($conn);
+
+			$conn = createConnectionToDatabase();
+			$query1 = "INSERT INTO `categories` (`inf_user_id`, `inf_category_type`) VALUES (".getUserIdByEmail($email) .", '$category');";
+			insertDataToDBQuery($conn, $query1);
+
+			mysqli_close($conn);
+
+			$conn = createConnectionToDatabase();
+			$query2 = "INSERT INTO `academic_degree` (`inf_user_id`, `inf_academic_degree`) VALUES (".getUserIdByEmail($email) .", '$academic_degree');";
+			insertDataToDBQuery($conn, $query2);
+
+
+			echo '<script>alert("You registered your user Successfully to Database");</script>';
+		}
+		else {
+			echo '<script>alert("Id You Entered is Wrong.");</script>';
+		}
+		
 		
 	}
 
@@ -121,7 +129,32 @@
 	    	<p style = "float:right"> ' .
 	    		getArticleCategoryById($inf_article_id).' </p>
 	    	<br> 
-	  	</article>';
+	  		</article>';
+		  	if (!$row["inf_approved"]){
+		  		echo '<form action = "index.php" method = "post">
+		  			<button type="submit" value="'.$inf_article_id.'" name = "approve_form">Approve</button>
+		  		</form>';
+		  	}
+		}
+	}
+
+	function echoApprovedArticles(){
+		$conn = createConnectionToDatabase();
+		$query = "select * from articles where inf_approved = 1";
+		$result = selectDataFromDBQuery($conn, $query);
+
+		while($row = $result->fetch_assoc()){
+			$inf_article_title = $row["inf_article_title"];
+			$inf_article_description = $row["inf_article_description"];
+			$inf_article_id = $row["inf_article_id"];
+			echo '<article>
+	    	<h1><a class = "article_title" href="article.php?id='.$inf_article_id.'">'.$inf_article_title.'</a></h1>
+	    	<p>'.substr($inf_article_description, 0, 340).'</p>
+	    	<p style = "float:right"> ' .
+	    		getArticleCategoryById($inf_article_id).' </p>
+	    	<br> 
+	  		</article>';
+		  	
 		}
 	}
 
@@ -191,7 +224,7 @@
 
 	function searchFor($search_input){
 		$conn = createConnectionToDatabase();
-		$query = "select * from articles where inf_article_title like '%$search_input%'";
+		$query = "select * from articles where inf_article_title like '%$search_input%' and inf_approved=1";
 		$result = selectDataFromDBQuery($conn, $query);
 
 		while($row = $result->fetch_assoc()){
@@ -299,5 +332,31 @@
 		mysqli_close($conn);
 	}
 
+	function isAdministrator($inf_user_id){
+		$conn = createConnectionToDatabase();
+		$query = "select * from administrators where inf_user_id = '$inf_user_id'";
+		$result = selectDataFromDBQuery($conn, $query);
+		$isAdmin = false;
+
+		while($row = $result->fetch_assoc()){
+			$isAdmin = true;
+		}
+		return $isAdmin;
+	}
+
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['approve_form'])){
+		$inf_article_id = $_POST["approve_form"];
+        approveArticle($inf_article_id);
+    }
+
+    function approveArticle($article_id){
+    	$conn = createConnectionToDatabase();
+		$query = "UPDATE `articles` SET `inf_approved` = '1' WHERE `articles`.`inf_article_id` = '$article_id';";
+
+		if ($conn->query($query) === TRUE) {
+		} else {
+		    echo "Error updating record: " . $conn->error;
+		}
+    }
 
 ?>

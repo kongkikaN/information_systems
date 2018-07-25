@@ -34,7 +34,25 @@
 <!-- Other stuff -->
 <main>
 	<div class = "container">
-	  	<?php echoAllArticles(); ?>
+	  	<?php 
+	  	if (isset($_GET["search_bar"])&& $_GET['search_bar'] != ''){
+	  		searchFor($_GET['search_bar']);
+	  	}
+	  	else {
+	  		
+	  		if (isset($_SESSION["user_id"])){
+  				if (isAdministrator($_SESSION["user_id"])){
+  					echoAllArticles();
+  				}
+  				else {
+  					echoApprovedArticles();
+  				}
+  			}
+  			else {
+  				echoApprovedArticles();
+  			}
+	  	}
+	  	?>
   	</div>
 </main>
 <?php 	

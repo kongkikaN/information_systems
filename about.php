@@ -34,11 +34,23 @@
 </nav>
 <main>
   <div class = "container">
-      <?php if (isset($_GET["search_bar"])&& $_GET['search_bar'] != ''){
+      <?php 
+      if (isset($_GET["search_bar"])&& $_GET['search_bar'] != ''){
         searchFor($_GET['search_bar']);
       }
       else {
-        echoAllArticles();
+        
+        if (isset($_SESSION["user_id"])){
+          if (isAdministrator($_SESSION["user_id"])){
+            echoAllArticles();
+          }
+          else {
+            echoApprovedArticles();
+          }
+        }
+        else {
+          echoApprovedArticles();
+        }
       }
       ?>
     </div>
