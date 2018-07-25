@@ -1,0 +1,117 @@
+/* Better box-sizing */
+* { box-sizing: border-box; }
+
+/* 1rem = 10px */
+html { font-size: 62.5%; }
+
+/* Default body */
+body { 
+  margin: 0; 
+  opacity: 0;
+  font: 1.6rem/1.875 'Avenir Next', sans-serif;
+}
+
+/* Loaded body */
+body.loaded {
+  opacity: 1;
+  transition: 1s opacity;
+}
+
+/* Default banner */
+.banner {
+  position: relative;
+  width: 100%;
+  height: 40rem;
+  padding: 0 5%;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+/* Default image container */
+.banner .background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  transform: translate3d(0,0,0) scale(1.25);
+  background: black url(../images/knowledge.jpg) no-repeat center center; 
+  background-size: cover;
+}
+
+/* Loaded image container */
+.loaded .banner .background {
+  transform: scale(1);
+  transition: 6.5s transform;
+}
+
+/* Other stuff */
+.banner h1 {
+  color: #EEE;
+  margin: 0;
+  line-height: 40rem;
+  text-transform: uppercase;
+  text-shadow: 0 0 .3rem black;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+
+#article_title.nostyle:link {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
+
+#article_title.nostyle:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+.anch {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+#logo {
+  transition: width 2s;
+}
+#logo:hover {
+  width: 500px;
+}
