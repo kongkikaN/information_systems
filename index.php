@@ -52,10 +52,10 @@
   			else {
   				echoApprovedArticles();
   			}
+  			
+
 	  	}
 	  	?>
-	  	
-	  	
   	</div>
 
 

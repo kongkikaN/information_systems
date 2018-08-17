@@ -150,6 +150,7 @@
 			echo '<article>
 	    	<h1><a class = "article_title" href="article.php?id='.$inf_article_id.'">'.$inf_article_title.'</a></h1>
 	    	<p>'.substr($inf_article_description, 0, 340).'</p>
+
 	    	<p style = "float:right"> ' .
 	    		getArticleCategoryById($inf_article_id).' </p>
 	    	<br> 
@@ -157,6 +158,8 @@
 		  	
 		}
 	}
+
+	
 
 	function getArticleCategoryById($id){
 		$conn = createConnectionToDatabase();
@@ -357,6 +360,86 @@
 		} else {
 		    echo "Error updating record: " . $conn->error;
 		}
+    }
+
+    
+
+    function thumbsUp($article_id){
+    	if (isset($_SESSION["user_id"])){
+    		$user_id = $_SESSION["user_id"];
+	    	$conn = createConnectionToDatabase();
+	    	$query1 = "select * from `article_rating` where `inf_user_id` = '$user_id' AND `inf_article_id` = '$article_id'";
+	    	$result = selectDataFromDBQuery($conn, $query1);
+	    	if (mysqli_num_rows($result)==0){
+	    		$query = "INSERT INTO `article_rating` (`inf_article_id`, `inf_rating_id`, `inf_article_thumbs_up`, `inf_article_thumbs_down`, `inf_user_id`) VALUES ('$article_id', NULL, '1', '0', '$user_id');";
+
+	    		insertDataToDBQuery($conn, $query);
+	    	}
+	    	else {
+	    		echo '<script>alert("You have already rated this article");</script>';
+	    	}
+
+			mysqli_close($conn);
+	    	//echo '<script>alert("You rated this article Successfully");</script>';
+    	}
+    	else {
+    		echo '<script>alert("Please Log in First");</script>';
+    	}
+    }
+
+    function thumbsDown($article_id){
+    	if (isset($_SESSION["user_id"])){
+    		$user_id = $_SESSION["user_id"];
+	    	$conn = createConnectionToDatabase();
+	    	$query1 = "select * from `article_rating` where `inf_user_id` = '$user_id' AND `inf_article_id` = '$article_id'";
+	    	$result = selectDataFromDBQuery($conn, $query1);
+	    	if (mysqli_num_rows($result)==0){
+	    		$query = "INSERT INTO `article_rating` (`inf_article_id`, `inf_rating_id`, `inf_article_thumbs_up`, `inf_article_thumbs_down`, `inf_user_id`) VALUES ('$article_id', NULL, '0', '1', '$user_id');";
+
+	    		insertDataToDBQuery($conn, $query);
+	    	}
+	    	else {
+	    		echo '<script>alert("You have already rated this article");</script>';
+	    	}
+
+			mysqli_close($conn);
+	    	//echo '<script>alert("You rated this article Successfully");</script>';
+    	}
+    	else {
+    		echo '<script>alert("Please Log in First");</script>';
+    	}
+    }
+
+    function getRating($article_id){
+    	$conn = createConnectionToDatabase();
+    	$query = "select * from article_rating where inf_article_id = '$article_id';";
+    	$result = selectDataFromDBQuery($conn, $query);
+
+    	$thumbs_up = 0;
+    	$thumbs_down = 0;
+
+    	while ($row = $result->fetch_assoc()){
+    		$thumbs_up = $thumbs_up + $row["inf_article_thumbs_up"];
+    		$thumbs_down = $thumbs_down + $row["inf_article_thumbs_down"];
+
+    	}
+    	if ($thumbs_up + $thumbs_down == 0){
+    		$rating = 50;
+    	}
+    	else {
+    		$rating = ceil(($thumbs_up / ($thumbs_down + $thumbs_up)) * 100);
+    		
+    	}
+    	return $rating .'%';
+    }
+
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['yes'])){
+        thumbsUp($_GET['id']);
+    }
+
+
+    if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['no'])){
+        thumbsDown($_GET['id']);
     }
 
 ?>
