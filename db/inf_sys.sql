@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 25, 2018 at 07:29 PM
--- Server version: 10.1.32-MariaDB
--- PHP Version: 7.2.5
+-- Φιλοξενητής: 127.0.0.1
+-- Χρόνος δημιουργίας: 20 Αυγ 2018 στις 14:21:58
+-- Έκδοση διακομιστή: 10.1.34-MariaDB
+-- Έκδοση PHP: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `inf_sys`
+-- Βάση δεδομένων: `inf_sys`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `academic_degree`
+-- Δομή πίνακα για τον πίνακα `academic_degree`
 --
 
 CREATE TABLE `academic_degree` (
@@ -35,19 +35,22 @@ CREATE TABLE `academic_degree` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `academic_degree`
+-- Άδειασμα δεδομένων του πίνακα `academic_degree`
 --
 
 INSERT INTO `academic_degree` (`inf_user_id`, `inf_academic_degree`, `inf_degree_id`) VALUES
 (28, 'Student', 7),
 (29, 'Student', 8),
 (30, 'Bachelors', 9),
-(31, 'Professor', 10);
+(31, 'Professor', 10),
+(32, 'Student', 11),
+(33, 'Student', 12),
+(34, 'Student', 13);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `administrators`
+-- Δομή πίνακα για τον πίνακα `administrators`
 --
 
 CREATE TABLE `administrators` (
@@ -56,16 +59,17 @@ CREATE TABLE `administrators` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `administrators`
+-- Άδειασμα δεδομένων του πίνακα `administrators`
 --
 
 INSERT INTO `administrators` (`inf_user_id`, `inf_admin_id`) VALUES
-(28, 3);
+(28, 3),
+(29, 8);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `articles`
+-- Δομή πίνακα για τον πίνακα `articles`
 --
 
 CREATE TABLE `articles` (
@@ -78,7 +82,7 @@ CREATE TABLE `articles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `articles`
+-- Άδειασμα δεδομένων του πίνακα `articles`
 --
 
 INSERT INTO `articles` (`inf_article_id`, `inf_article_title`, `inf_article_description`, `inf_article_url`, `inf_user_id`, `inf_approved`) VALUES
@@ -91,7 +95,7 @@ INSERT INTO `articles` (`inf_article_id`, `inf_article_title`, `inf_article_desc
 -- --------------------------------------------------------
 
 --
--- Table structure for table `article_category`
+-- Δομή πίνακα για τον πίνακα `article_category`
 --
 
 CREATE TABLE `article_category` (
@@ -101,7 +105,7 @@ CREATE TABLE `article_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `article_category`
+-- Άδειασμα δεδομένων του πίνακα `article_category`
 --
 
 INSERT INTO `article_category` (`inf_article_category`, `inf_article_id`, `inf_article_category_id`) VALUES
@@ -114,7 +118,31 @@ INSERT INTO `article_category` (`inf_article_category`, `inf_article_id`, `inf_a
 -- --------------------------------------------------------
 
 --
--- Table structure for table `authors`
+-- Δομή πίνακα για τον πίνακα `article_rating`
+--
+
+CREATE TABLE `article_rating` (
+  `inf_article_id` int(11) NOT NULL,
+  `inf_rating_id` int(11) NOT NULL,
+  `inf_article_thumbs_up` int(11) NOT NULL,
+  `inf_article_thumbs_down` int(11) NOT NULL,
+  `inf_user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `article_rating`
+--
+
+INSERT INTO `article_rating` (`inf_article_id`, `inf_rating_id`, `inf_article_thumbs_up`, `inf_article_thumbs_down`, `inf_user_id`) VALUES
+(10, 11, 1, 0, 28),
+(10, 12, 1, 0, 29),
+(12, 13, 0, 1, 29),
+(10, 14, 0, 1, 30);
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `authors`
 --
 
 CREATE TABLE `authors` (
@@ -125,7 +153,7 @@ CREATE TABLE `authors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `authors`
+-- Άδειασμα δεδομένων του πίνακα `authors`
 --
 
 INSERT INTO `authors` (`inf_article_id`, `inf_Author_id`, `inf_Author_first_name`, `inf_Author_last_name`) VALUES
@@ -138,7 +166,7 @@ INSERT INTO `authors` (`inf_article_id`, `inf_Author_id`, `inf_Author_first_name
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Δομή πίνακα για τον πίνακα `categories`
 --
 
 CREATE TABLE `categories` (
@@ -148,19 +176,22 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `categories`
+-- Άδειασμα δεδομένων του πίνακα `categories`
 --
 
 INSERT INTO `categories` (`inf_user_id`, `inf_category_type`, `inf_category_id`) VALUES
 (28, 'Digital Systems', 10),
 (29, 'Digital Systems', 11),
 (30, 'Computer Science', 12),
-(31, 'Business Administration', 13);
+(31, 'Business Administration', 13),
+(32, 'Statistics', 14),
+(33, 'Maritime Studies', 15),
+(34, 'Business Administration', 16);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Δομή πίνακα για τον πίνακα `users`
 --
 
 CREATE TABLE `users` (
@@ -172,106 +203,119 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- Άδειασμα δεδομένων του πίνακα `users`
 --
 
 INSERT INTO `users` (`inf_user_id`, `inf_first_name`, `inf_last_name`, `inf_email`, `inf_password`) VALUES
 (28, 'Nikos', 'Kongkika', 'kongkika@gmail.com', '123456'),
 (29, 'Giorgos', 'Margaritis', 'margaritis@gmail.com', '123456'),
-(30, 'Alexis', 'Trakakis', 'trakakis@gmail.com', '123456'),
-(31, 'Vasilis', 'Nikolaou', 'nikolaou@gmail.com', '123456');
+(32, 'Giannis', 'Manos', 'Gmanos@gmail.com', '123456'),
+(33, 'Makis', 'Marmaridis', 'marmaridismakis@gmail.com', '123456'),
+(34, 'mixalis', 'marmaridis', 'mixmarm@gmail.com', '123456');
 
 --
--- Indexes for dumped tables
+-- Ευρετήρια για άχρηστους πίνακες
 --
 
 --
--- Indexes for table `academic_degree`
+-- Ευρετήρια για πίνακα `academic_degree`
 --
 ALTER TABLE `academic_degree`
   ADD PRIMARY KEY (`inf_degree_id`);
 
 --
--- Indexes for table `administrators`
+-- Ευρετήρια για πίνακα `administrators`
 --
 ALTER TABLE `administrators`
   ADD PRIMARY KEY (`inf_admin_id`);
 
 --
--- Indexes for table `articles`
+-- Ευρετήρια για πίνακα `articles`
 --
 ALTER TABLE `articles`
   ADD PRIMARY KEY (`inf_article_id`);
 
 --
--- Indexes for table `article_category`
+-- Ευρετήρια για πίνακα `article_category`
 --
 ALTER TABLE `article_category`
   ADD PRIMARY KEY (`inf_article_category_id`);
 
 --
--- Indexes for table `authors`
+-- Ευρετήρια για πίνακα `article_rating`
+--
+ALTER TABLE `article_rating`
+  ADD PRIMARY KEY (`inf_rating_id`);
+
+--
+-- Ευρετήρια για πίνακα `authors`
 --
 ALTER TABLE `authors`
   ADD PRIMARY KEY (`inf_Author_id`);
 
 --
--- Indexes for table `categories`
+-- Ευρετήρια για πίνακα `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`inf_category_id`);
 
 --
--- Indexes for table `users`
+-- Ευρετήρια για πίνακα `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`inf_user_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT για άχρηστους πίνακες
 --
 
 --
--- AUTO_INCREMENT for table `academic_degree`
+-- AUTO_INCREMENT για πίνακα `academic_degree`
 --
 ALTER TABLE `academic_degree`
-  MODIFY `inf_degree_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `inf_degree_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `administrators`
+-- AUTO_INCREMENT για πίνακα `administrators`
 --
 ALTER TABLE `administrators`
-  MODIFY `inf_admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `inf_admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `articles`
+-- AUTO_INCREMENT για πίνακα `articles`
 --
 ALTER TABLE `articles`
   MODIFY `inf_article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `article_category`
+-- AUTO_INCREMENT για πίνακα `article_category`
 --
 ALTER TABLE `article_category`
   MODIFY `inf_article_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `authors`
+-- AUTO_INCREMENT για πίνακα `article_rating`
+--
+ALTER TABLE `article_rating`
+  MODIFY `inf_rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT για πίνακα `authors`
 --
 ALTER TABLE `authors`
   MODIFY `inf_Author_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `categories`
+-- AUTO_INCREMENT για πίνακα `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `inf_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `inf_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT για πίνακα `users`
 --
 ALTER TABLE `users`
-  MODIFY `inf_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `inf_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

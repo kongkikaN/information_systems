@@ -433,7 +433,102 @@
     	return $rating .'%';
     }
 
-	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['yes'])){
+    function getAllUserData(){
+    	$conn = createConnectionToDatabase();
+    	$query = "select * from users";
+    	$result = selectDataFromDBQuery($conn, $query);
+    	$counter = 1;
+    	while ($row = $result->fetch_assoc()){
+
+    		echo printUser($row["inf_first_name"], $row["inf_last_name"], $row["inf_email"], $counter,
+    			isAdministrator($row["inf_user_id"]), $row["inf_user_id"]);
+    		$counter = $counter +1;
+    	}
+    }
+
+    function printUser($f_name, $l_name, $e_mail, $counter, $status, $user_id){
+    	$user_status = "simple user";
+    	if ($status){
+    		$user_status = "administrator";
+    	}
+    	if ($status){
+    		return '<tr>
+			        <td>'.$counter.'</td>
+			        <td>'.$f_name.'</td>
+			        <td>'.$l_name.'</td>
+			        <td>'.$e_mail.'</td>
+			        <td>'.$user_status.'</td>
+			        <td>
+			        <form method = "post">
+			        	<button type = "submit" name = "delete_btn" value = "'.$user_id.'">Delete</button>
+			        </form>
+			        </td>
+			        <td>
+			        <form method = "post">
+			        	<button type = "submit" name = "deleteAdmin_btn" value = "'.$user_id.'">Remove Admin</button>
+			        </form>
+			        </td>
+		        </tr>';
+    	}
+    	else {
+    	return '<tr>
+			        <td>'.$counter.'</td>
+			        <td>'.$f_name.'</td>
+			        <td>'.$l_name.'</td>
+			        <td>'.$e_mail.'</td>
+			        <td>'.$user_status.'</td>
+			        <td>
+			        <form method = "post">
+			        	<button type = "submit" name = "delete_btn" value = "'.$user_id.'">Delete</button>
+			        </form>
+			        </td>
+			        <td>
+			        <form method = "post">
+			        	<button type = "submit" name = "makeadmin_btn" value = "'.$user_id.'">Make Admin</button>
+			        </form>
+			        </td>
+		        </tr>';
+		    }
+    }
+
+    function makeAdmin($user_id){
+    	$conn = createConnectionToDatabase();
+    	$query = "INSERT INTO `administrators` (`inf_user_id`, `inf_admin_id`) VALUES ('$user_id', NULL) ";
+    	insertDataToDBQuery($conn, $query);
+    }
+
+    function deleteAdmin($user_id){
+    	$conn = createConnectionToDatabase();
+    	$query = "DELETE FROM administrators WHERE inf_user_id='$user_id'";
+    	if ($conn->query($query) === TRUE) {
+		    echo '<script>alert("Record deleted successfully");</script>';
+		} else {
+		}
+    }
+
+
+    function deleteUser($user_id){
+    	$conn = createConnectionToDatabase();
+    	$query = "DELETE FROM users WHERE inf_user_id='$user_id'";
+    	if ($conn->query($query) === TRUE) {
+		    echo '<script>alert("Record deleted successfully");</script>';
+		} else {
+		}
+    }
+
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['delete_btn'])){
+        deleteUser($_POST['delete_btn']);
+    }
+
+    if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['makeadmin_btn'])){
+        makeAdmin($_POST['makeadmin_btn']);
+    }
+
+    if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['deleteAdmin_btn'])){
+        deleteAdmin($_POST['deleteAdmin_btn']);
+    }
+
+    if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['yes'])){
         thumbsUp($_GET['id']);
     }
 

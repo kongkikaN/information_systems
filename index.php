@@ -11,9 +11,21 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style/style.css">
     <script src="functions/functions.js"></script>
+    <?php 
+    if (isset($_SESSION["user_id"])){
+    	$user_id = $_SESSION["user_id"];
+    	if (isAdministrator($user_id)){
+    		echo '<div class="alert alert-danger" role="alert">
+				  Welcome admin,' . $_SESSION["first_name"].'. Click <a href = "users.php">HERE</a> to display users.
+				</div>';
+    	}
+    }
+    ?>
+    
 </head>
 <body>
 	<!-- Header -->
+
 <header class="banner">
 	<span class="background"></span>
 	<h1><a href="index.php"><img id = "logo" src="images/logo.png" width="450px"></a></h1>

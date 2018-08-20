@@ -11,16 +11,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style/style.css">
     <script src="functions/functions.js"></script>
-    <?php 
-    if (isset($_SESSION["user_id"])){
-      $user_id = $_SESSION["user_id"];
-      if (isAdministrator($user_id)){
-        echo '<div class="alert alert-danger" role="alert">
-          Welcome admin,' . $_SESSION["first_name"].'. Click <a href = "users.php">HERE</a> to display users.
-        </div>';
-      }
-    }
-    ?>
 </head>
 <body>
   <!-- Header -->
@@ -28,6 +18,9 @@
   <span class="background"></span>
   <h1><a href="index.php"><img src="images/logo.png" width="500px"></a></h1>
 </header>
+<script>
+  $("header").slideUp(1500);
+</script>
 <nav id="navigation">
     <ul style = "background-color: #080519;">
       <div style = "background-color: #080519;" class = "container">
@@ -43,27 +36,30 @@
     </ul> 
 </nav>
 <main>
-  <div class = "container">
-      <?php 
-      if (isset($_GET["search_bar"])&& $_GET['search_bar'] != ''){
-        searchFor($_GET['search_bar']);
-      }
-      else {
+  <div class = "col-md-2"></div>
+  <div class = "col-md-8">
+    <br>
+    <br>
+    <table = class = "table table-striped">
+      <thead class = "warning">
+        <tr>
+          <th scope = "col">#</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Status</th>
+          <th scope="col">Delete</th>
+          <th scope="col">Change Privileges</th>
+        </tr>
         
-        if (isset($_SESSION["user_id"])){
-          if (isAdministrator($_SESSION["user_id"])){
-            echoAllArticles();
-          }
-          else {
-            echoApprovedArticles();
-          }
-        }
-        else {
-          echoApprovedArticles();
-        }
-      }
-      ?>
-    </div>
+
+      </thead>
+      <tbody>
+        <?php getAllUserData() ?>
+      </tbody>
+    </table>
+  </div>
+  <div class = "col-md-2"></div>
 </main>
 <?php   
   include 'login_modal.php';
