@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Φιλοξενητής: 127.0.0.1
--- Χρόνος δημιουργίας: 20 Αυγ 2018 στις 14:21:58
+-- Χρόνος δημιουργίας: 21 Αυγ 2018 στις 09:34:02
 -- Έκδοση διακομιστή: 10.1.34-MariaDB
 -- Έκδοση PHP: 7.2.7
 
@@ -45,7 +45,8 @@ INSERT INTO `academic_degree` (`inf_user_id`, `inf_academic_degree`, `inf_degree
 (31, 'Professor', 10),
 (32, 'Student', 11),
 (33, 'Student', 12),
-(34, 'Student', 13);
+(34, 'Student', 13),
+(35, 'Bachelors', 14);
 
 -- --------------------------------------------------------
 
@@ -64,7 +65,7 @@ CREATE TABLE `administrators` (
 
 INSERT INTO `administrators` (`inf_user_id`, `inf_admin_id`) VALUES
 (28, 3),
-(29, 8);
+(32, 10);
 
 -- --------------------------------------------------------
 
@@ -90,7 +91,8 @@ INSERT INTO `articles` (`inf_article_id`, `inf_article_title`, `inf_article_desc
 (11, 'Price Competition, Fluctuations and Welfare Guarantees 2015', 'In various markets where sellers compete in price, price oscillations are observed rather than convergence\r\nto equilibrium. Such fluctuations have been empirically observed in the retail market for gasoline, in airline\r\npricing and in the online sale of consumer goods. Motivated by this, we study a model of price competition\r\nin which equilibria rarely exist. We seek to analyze the welfare, despite the nonexistence of equilibria, and\r\npresent welfare guarantees as a function of the market power of the sellers.\r\nWe first study best response dynamics in markets with sellers that provide a homogeneous good, and\r\nshow that except for a modest number of initial rounds, the welfare is guaranteed to be high. We consider\r\ntwo variations: in the first the sellers have full information about the buyerâ€™s valuation. Here we show that\r\nif there are n items available across all sellers and nmax is the maximum number of items controlled by any\r\ngiven seller, then the ratio of the optimal welfare to the achieved welfare will be at most log \r\nn\r\nnâˆ’nmax+1\r\n+1.\r\nAs the market power of the largest seller diminishes, the welfare becomes closer to optimal. In the second\r\nvariation we consider an extended model in which sellers have uncertainty about the buyerâ€™s valuation.\r\nHere we similarly show that the welfare improves as the market power of the larger seller decreases, yet\r\nwith a worse ratio of n\r\nnâˆ’nmax+1 . Our welfare bounds in both cases are essentially tight. The exponential\r\ngap in welfare between the two variations quantifies the value of accurately learning the buyerâ€™s valuation\r\nin such settings.\r\nFinally, we show that extending our results to heterogeneous goods in general is not possible. Even for\r\nthe simple class of k-additive valuations, there exists a setting where the welfare approximates the optimal\r\nwelfare within any non-zero factor only for O(1/s) fraction of the time, where s is the number of sellers.\r\nCategories and Subject Descriptors: J.4 [Social and Behavioral Sciences]: Economics; F.2.0 [Analysis of\r\nAlgorithms and Problem Complexity]: General\r\nGeneral Terms: Algorithms, Economics, Theory\r\nAdditional Key Words and Phrases: Price Competition, Best Response Dynamics, Welfare Guarantee', 'uploads/2 Price Competition, Fluctuations and Welfare Guarantees 2015.pdf', 28, 0),
 (12, 'Combinatorial Auctions with Decreasing 2002', 'In most of microeconomic theory, consumers are assumed to exhibit\r\ndecreasing marginal utilities. This paper considers combinatorial auctions\r\namong such submodular buyers. The valuations of such buyers are placed\r\nwithin a hierarchy of valuations that exhibit no complementarities, a hierarchy\r\nthat includes also OR and XOR combinations of singleton valuations,\r\nand valuations satisfying the gross substitutes property. Those last\r\nvaluations are shown to form a zero-measure subset of the submodular\r\nvaluations that have positive measure. While we show that the allocation\r\nproblem among submodular valuations is NP-hard, we present an\r\nefficient greedy 2-approximation algorithm for this case and generalize it\r\nto the case of limited complementarities. No such approximation algorithm\r\nexists in a setting allowing for arbitrary complementarities. Some\r\nresults about strategic aspects of combinatorial auctions among players\r\nwith decreasing marginal utilities are also presented.\r\n', 'uploads/3 Combinatorial Auctions with Decreasing 2002.pdf', 28, 1),
 (13, 'Connections between Learning, Game Theory, and Optimization', 'The combinatorial auction setting is formalized as follows. There is a set X of m indivisible\r\ngoods that are concurrently auctioned among n bidders/players. Each player i âˆˆ {1, . . . , n}\r\nhas a valuation function mapping a subset of products to their value to the player, so\r\nvi\r\n: 2X â†’ R.\r\nTypical assumptions, that we will make today, are monotonicity (also known as â€œfree disposalâ€),\r\ni.e. vi(S) â‰¤ vi(T), âˆ€ S âŠ† T, and v(âˆ…) = 0.\r\nThe whole point of defining a player valuation is that the value of a bundle of items need not\r\nbe equal to the sum of his values for the items in the bundle. For disjoint sets S âˆ©T = âˆ…, we\r\nsay that S, T are complements if v(S âˆª T) â‰¥ v(S) + v(T) (for example S, T are a right shoe\r\nand a left shoe) and we say that S, T are substitutes if v(S âˆª T) â‰¤ v(S) + v(T) (for example\r\nS, T are margarine and butter).\r\nWe will assume quasilinear utilities, i.e. if the bidder wins a bundle S and pays p then its\r\nutility is vi(S) âˆ’ p. We also assume no externalities, i.e. that a bidder only cares about the\r\nitems he receives and not about how the other items are allocated among the other bidders.\r\nIn general we have representation and communication concerns: the valuation functions are\r\nexponential sized objects since they specify a value for each bundle. So we in general we have\r\nto deal with the question of how can enough information be transferred to the seller so that\r\na reasonably good decision can be made? For the rest of the lecture today we will consider\r\na class of valuations for which representation is easy, exact optimization is challenging, but\r\nthe best possible approximation is achieved by a truthful mechanism.', 'uploads/4 Connections between Learning, Game Theory, and Optimization 2010.pdf', 31, 1),
-(14, 'Truth Revelation in Approximately Efficient Combinatorial Auctions', 'Abstract. Some important classical mechanisms considered in Microeconomics and Game Theory\r\nrequire the solution of a difficult optimization problem. This is true of mechanisms for combinatorial\r\nauctions, which have in recent years assumed practical importance, and in particular of the gold\r\nstandard for combinatorial auctions, the Generalized Vickrey Auction (GVA). Traditional analysis\r\nof these mechanismsâ€”in particular, their truth revelation propertiesâ€”assumes that the optimization\r\nproblems are solved precisely. In reality, these optimization problems can usually be solved only in an\r\napproximate fashion. We investigate the impact on such mechanisms of replacing exact solutions by\r\napproximate ones. Specifically, we look at a particular greedy optimization method. We show that the\r\nGVA payment scheme does not provide for a truth revealing mechanism. We introduce another scheme\r\nthat does guarantee truthfulness for a restricted class of players. We demonstrate the latter property by\r\nidentifying natural properties for combinatorial auctions and showing that, for our restricted class of\r\nplayers, they imply that truthful strategies are dominant. Those properties have applicability beyond\r\nthe specific auction studied', 'uploads/6 Truth Revelation in Approximately Efficient - LOS-JACM(proof) .pdf', 31, 1);
+(14, 'Truth Revelation in Approximately Efficient Combinatorial Auctions', 'Abstract. Some important classical mechanisms considered in Microeconomics and Game Theory\r\nrequire the solution of a difficult optimization problem. This is true of mechanisms for combinatorial\r\nauctions, which have in recent years assumed practical importance, and in particular of the gold\r\nstandard for combinatorial auctions, the Generalized Vickrey Auction (GVA). Traditional analysis\r\nof these mechanismsâ€”in particular, their truth revelation propertiesâ€”assumes that the optimization\r\nproblems are solved precisely. In reality, these optimization problems can usually be solved only in an\r\napproximate fashion. We investigate the impact on such mechanisms of replacing exact solutions by\r\napproximate ones. Specifically, we look at a particular greedy optimization method. We show that the\r\nGVA payment scheme does not provide for a truth revealing mechanism. We introduce another scheme\r\nthat does guarantee truthfulness for a restricted class of players. We demonstrate the latter property by\r\nidentifying natural properties for combinatorial auctions and showing that, for our restricted class of\r\nplayers, they imply that truthful strategies are dominant. Those properties have applicability beyond\r\nthe specific auction studied', 'uploads/6 Truth Revelation in Approximately Efficient - LOS-JACM(proof) .pdf', 31, 1),
+(15, 'Î Î»Î·ÏÎ¿Ï†Î¿ÏÎ¹Î±ÎºÎ¬ Î£Ï…ÏƒÏ„Î®Î¼Î±Ï„Î± - Î”Î¹Î±Î³ÏÎ¬Î¼Î¼Î±Ï„Î±', 'Î•Ï€Î¹ÏƒÏ…Î½Î¬Ï€Ï„Î¿Î½Ï„Î±Î¹ Î´Î¹Î±Î³ÏÎ¬Î¼Î¼Î±Ï„Î± Ï„Î·Ï‚ ÎµÏÎ³Î±ÏƒÎ¯Î±Ï‚ ÏƒÏ„Î¿ Î¼Î¬Î¸Î·Î¼Î± Î Î»Î·ÏÎ¿Ï†Î¿ÏÎ¹Î±ÎºÏŽÎ½ Î£Ï…ÏƒÏ„Î·Î¼Î¬Ï„Ï‰Î½ Ï„Î¿Ï… Ï„Î¼Î®Î¼Î±Ï„Î¿Ï‚ Î¨Î·Ï†Î¹Î±ÎºÏŽÎ½ Î£Ï…ÏƒÏ„Î·Î¼Î¬Ï„Ï‰Î½.\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'uploads/Logical.pdf', 29, 1);
 
 -- --------------------------------------------------------
 
@@ -113,7 +115,8 @@ INSERT INTO `article_category` (`inf_article_category`, `inf_article_id`, `inf_a
 ('Computer Science', 11, 2),
 ('Mathematics', 12, 3),
 ('', 13, 4),
-('Mathematics', 14, 5);
+('Mathematics', 14, 5),
+('Computer Science', 15, 6);
 
 -- --------------------------------------------------------
 
@@ -161,7 +164,8 @@ INSERT INTO `authors` (`inf_article_id`, `inf_Author_id`, `inf_Author_first_name
 (11, 11, 'Noam', 'Nisan'),
 (12, 12, 'Benny', 'Lehmann'),
 (13, 13, 'Maria-Florina', 'Balcan'),
-(14, 14, 'DANIEL ', 'LEHMANN');
+(14, 14, 'DANIEL ', 'LEHMANN'),
+(15, 15, 'Nikos', 'Kongkika');
 
 -- --------------------------------------------------------
 
@@ -186,7 +190,8 @@ INSERT INTO `categories` (`inf_user_id`, `inf_category_type`, `inf_category_id`)
 (31, 'Business Administration', 13),
 (32, 'Statistics', 14),
 (33, 'Maritime Studies', 15),
-(34, 'Business Administration', 16);
+(34, 'Business Administration', 16),
+(35, 'Digital Systems', 17);
 
 -- --------------------------------------------------------
 
@@ -211,7 +216,8 @@ INSERT INTO `users` (`inf_user_id`, `inf_first_name`, `inf_last_name`, `inf_emai
 (29, 'Giorgos', 'Margaritis', 'margaritis@gmail.com', '123456'),
 (32, 'Giannis', 'Manos', 'Gmanos@gmail.com', '123456'),
 (33, 'Makis', 'Marmaridis', 'marmaridismakis@gmail.com', '123456'),
-(34, 'mixalis', 'marmaridis', 'mixmarm@gmail.com', '123456');
+(34, 'mixalis', 'marmaridis', 'mixmarm@gmail.com', '123456'),
+(35, 'kwstas', 'antoniadis', 'antoniadisk@gmail.com', '123456');
 
 --
 -- Ευρετήρια για άχρηστους πίνακες
@@ -273,25 +279,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT για πίνακα `academic_degree`
 --
 ALTER TABLE `academic_degree`
-  MODIFY `inf_degree_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `inf_degree_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT για πίνακα `administrators`
 --
 ALTER TABLE `administrators`
-  MODIFY `inf_admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `inf_admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT για πίνακα `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `inf_article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `inf_article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT για πίνακα `article_category`
 --
 ALTER TABLE `article_category`
-  MODIFY `inf_article_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `inf_article_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT για πίνακα `article_rating`
@@ -303,19 +309,19 @@ ALTER TABLE `article_rating`
 -- AUTO_INCREMENT για πίνακα `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `inf_Author_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `inf_Author_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT για πίνακα `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `inf_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `inf_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT για πίνακα `users`
 --
 ALTER TABLE `users`
-  MODIFY `inf_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `inf_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
