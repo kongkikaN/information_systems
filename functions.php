@@ -227,7 +227,7 @@
 
 	function searchFor($search_input){
 		$conn = createConnectionToDatabase();
-		$query = "select * from articles where inf_article_title like '%$search_input%' and inf_approved=1";
+		$query = "select * from articles where inf_article_title like '%$search_input%' or inf_article_description like '%$search_input%' and inf_approved=1";
 		$result = selectDataFromDBQuery($conn, $query);
 
 		while($row = $result->fetch_assoc()){
