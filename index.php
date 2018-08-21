@@ -25,7 +25,6 @@
 </head>
 <body>
 	<!-- Header -->
-
 <header class="banner">
 	<span class="background"></span>
 	<h1><a href="index.php"><img id = "logo" src="images/logo.png" width="450px"></a></h1>
