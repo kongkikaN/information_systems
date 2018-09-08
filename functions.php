@@ -25,7 +25,7 @@
 			insertDataToDBQuery($conn, $query2);
 
 
-			echo '<script>alert("You registered your user Successfully to Database");</script>';
+			//echo '<script>alert("You registered your user Successfully to Database");</script>';
 		}
 		else {
 			echo '<script>alert("Id You Entered is Wrong.");</script>';
@@ -49,8 +49,9 @@
 				$_SESSION["first_name"] = $row["inf_first_name"];
 				$_SESSION["last_name"] = $row["inf_last_name"];
 				$_SESSION["email"] = $row["inf_email"];
-				echo '<script>alert("Connected Successfully User!! '.$_SESSION["email"].'");</script>';
+				//echo '<script>alert("Connected Successfully User!! '.$_SESSION["email"].'");</script>';
 				//header('Location: '. "index.php");
+				echo "<meta http-equiv='refresh' content='0'>";
 			}
 		}
 		if (!isset($_SESSION["email"])){
